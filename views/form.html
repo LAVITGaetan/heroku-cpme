@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouveau formulaire</title>
+    <!-- CSS -->
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Nunito&display=swap"
+        rel="stylesheet">
+</head>
+
+<style>
+    /* Global */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Montserrat;
+}
+
+:root {
+    --clrDarker: #12232E;
+    --clrDark: #203647;
+    --clrCta: #007CC7;
+    --clrLight: #4DA8DA;
+    --clrLighter: #EEFBFB;
+    --clrGradient: linear-gradient(138.1deg, #007CC7 0%, #4DA8DA 106.04%);
+    ;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: 80px 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    height: clamp(100vh, 100vh, 100vh);
+}
+
+/*Message*/
+
+.message {
+    width: 300px;
+    height: 150px;
+    bottom: 150px;
+    left: 360px;
+    position: fixed;
+    background-color: #fff;
+    display: none;
+    border-top: 5px solid var(--clrDark);
+}
+
+/* Navbar */
+
+.navbar {
+    grid-area: 1 / 1 / 2 / 3;
+    background-color: var(--clrDarker);
+    box-shadow: 0px 2px 5px 0px #0000001A;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-links {
+    width: calc(100% - 200px);
+    display: flex;
+}
+
+.navbar-link {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+    margin-right: 50px;
+    color: #fff;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+}
+
+.navbar-action {
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-image: var(--clrGradient);
+    color: #fff;
+
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 2px;
+    text-align: center;
+}
+
+/* Sidebar */
+.sidebar {
+    grid-area: 2 / 1 / 3 / 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+overflow: auto;
+}
+
+
+.sidebar-content {
+    grid-area: 1 / 1 / 2 / 2;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    align-content: flex-start;
+    margin: 10px;
+}
+
+
+
+.sidebar-item {
+    transition: .3s ease;
+    background: #fff;
+    border-radius: 2px;
+    width: calc(100% - 10px);
+    height: 48px;
+    padding: 10px;
+    display: flex;
+    cursor: pointer;
+border: 1px solid #007cc720;    align-items: center;
+    margin: 0 auto 15px auto;
+    position: relative;
+}
+
+.sidebar-item:hover {
+    border-color: var(--clrCta);
+}
+
+.item-title {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+    line-height: 0;
+    color: var(--clrDark);
+    margin-left: 12px;
+}
+
+
+/* Editor */
+.editor {
+    grid-area: 2 / 2 / 3 / 3;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.editor-save {
+    height: 60px;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+    color: #fff;
+    font-family: Montserrat;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    background: var(--clrCta);
+    width: fit-content;
+    position: fixed;
+    z-index: 100;
+    bottom: 30px;
+    right: 38px;
+}
+
+#form-container { 
+    overflow: auto;
+    align-content: flex-start;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: #ffffff;
+    flex-wrap: wrap;
+    padding: 15px;
+    min-height: 100%;
+    max-height: 100%;
+    margin-bottom: 2em;
+    position: relative;
+}
+
+.editor-title {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: 0.035em;
+    color: var(--clrDarker);
+    outline: none;
+    border: none;
+    width: 100%;
+padding: 10px;
+margin-bottom: 1em;
+    background-color: #fff;
+    max-width: 1000px;
+}
+
+.editor-add {
+    transition: .3s ease;
+    position: absolute;
+    bottom: -48px;
+    z-index: 10;
+   background-color: #007CC799;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: calc(50% - 16px);
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.editor-add:hover {
+    background-color: var(--clrCta);
+}
+
+.required-container {
+display: flex;
+align-items: flex-end;
+}
+
+.required-checkbox {
+    border: 1px solid var(--clrCta);
+    margin-right: 10px;
+    height: 18px;
+    width: 18px;
+    cursor: pointer;
+}
+
+.required-text {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.035em;
+    color: var(--clrDark);
+}
+
+/*scrollbar*/
+
+::-webkit-scrollbar {
+    width:6px;
+  }
+  ::-webkit-scrollbar-track{
+    background:#007cc709;
+  
+  }
+  ::-webkit-scrollbar-thumb{
+    background: #007cc720;
+  }
+
+.element-container {
+    transition: .3s ease;
+    width: 100%;
+    margin: 0 0 84px 0;
+    padding: 20px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    box-shadow: 0 2px 10px 0 #007cc720;
+}
+
+.label {
+    font-family: Montserrat;
+    width: fit-content;
+    padding: 0 0 .5em 0;
+    outline: none;
+    margin-bottom: .7em;
+    font-size: 17px;
+    border-bottom: 3px solid var(--clrLighter);
+    cursor: text;
+    font-weight: 600;
+    color: var(--clrDarker);
+}
+
+.input, .select {
+    width: 100%;
+    max-width: 400px;
+    height: 40px;
+    margin-bottom: 2em;
+    background: #fff;
+    border : none;
+    background:#4DA8DA05;
+    outline: none;
+    padding-left: 1em;
+}
+
+.input-container {
+    height: 40px;
+    display: flex;
+    max-width: 100%;
+    margin-bottom: 2em;
+}
+
+.radio-container, .section-container {
+    width: fit-content;
+    margin-right: 1em;
+    display: flex;
+    background:#4DA8DA05;
+
+    align-items: center;
+    padding: 1em;
+}
+
+.radio-label,
+.section-label  {
+    font-family: Montserrat;
+    padding-left: .5em;
+    font-size: 14px;
+
+}
+
+::placeholder {
+    font-family: Montserrat;
+color: #12232e71;}
+
+.delete {
+    position: absolute;
+    top: 1.5em;
+    right: 1.5em;
+    width: 24px;
+    height: 24px;
+    background-image: url(./img/delete.svg);
+    cursor: pointer;
+    background-size: contain;
+}
+
+.up {
+    height: 24px;
+    width: 24px;
+    background-image: url(./img/up.svg);
+    background-size: contain;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    align-self: flex-end;
+    position: absolute;
+    bottom: 12px;
+    right: 1.5em;
+}
+
+.down {
+    height: 24px;
+    width: 24px;
+    background-image: url(./img/down.svg);
+    background-size: contain;
+    font-weight: 600;
+    font-size: 14px;
+    align-self: flex-end;
+    cursor: pointer;
+    position: absolute;
+    right: 1.5em;
+    bottom: 48px;
+}
+</style>
+
+<body>
+    <div class="content">
+        <div class="navbar">
+            <div class="navbar-links">
+                <div class="navbar-link">Accueil</div>
+                <div class="navbar-link">Adhérents</div>
+                <div class="navbar-link">Mandats</div>
+                <div class="navbar-link">Formulaire</div>
+                <div class="navbar-link">Autres</div>
+            </div>
+            <div class="navbar-action">Nouvel adhérent</div>
+        </div>
+        <div class="sidebar">
+            <div class="sidebar-content">
+                <div onclick="generateInput('text')" class="sidebar-item button" name="text"><img src="../img/text.svg"
+                        width="16px" height="16px" alt="text" class="item-icon">
+                    <div class="item-title">Texte</div>
+                </div>
+                <div onclick="generateInput('date')" class="sidebar-item button" name="date"><img src="../img/date.svg"
+                        width="16px" height="16px" alt="date" class="item-icon">
+                    <div class="item-title">Date</div>
+                </div>
+                <div onclick="generateInput('radio')" class="sidebar-item button" name="radio"><img
+                        src="../img/radio.svg" width="20px" height="20px" alt="radio" class="item-icon">
+                    <div class="item-title">Choix</div>
+                </div>
+                <div onclick="generateInput('identite')" class="sidebar-item button" name="identite"><img
+                        src="../img/identite.svg" width="20px" height="20px" alt="identite" class="item-icon">
+                    <div class="item-title">Identité</div>
+                </div>
+                <div onclick="generateInput('entreprise')" class="sidebar-item button" name="entreprise"><img
+                        src="../img/entreprise.svg" width="20px" height="20px" alt="entreprise" class="item-icon">
+                    <div class="item-title">Entreprise</div>
+                </div>
+                <div onclick="generateInput('email')" class="sidebar-item button" name="email"><img
+                        src="../img/email.svg" width="20px" height="20px" alt="email" class="item-icon">
+                    <div class="item-title">Email</div>
+                </div>
+                <div onclick="generateInput('telephone')" class="sidebar-item button" name="telephone"><img
+                        src="../img/telephone.svg" width="20px" height="20px" alt="telephone" class="item-icon">
+                    <div class="item-title">Téléphone</div>
+                </div>
+                <div onclick="generateInput('section')" class="sidebar-item button" name="section"><img
+                    src="../img/section.svg" width="20px" height="20px" alt="section" class="item-icon">
+                <div class="item-title">Section</div>
+            </div>
+            <div onclick="generateInput('salaries')" class="sidebar-item button" name="salaries"><img
+                src="../img/salaries.svg" width="20px" height="20px" alt="salaries" class="item-icon">
+            <div class="item-title">Salariés</div>
+        </div>
+            <div onclick="generateInput('ville')" class="sidebar-item button" name="ville"><img
+                src="../img/ville.svg" width="20px" height="20px" alt="ville" class="item-icon">
+            <div class="item-title">Ville</div>
+        </div>
+        <div onclick="generateInput('rgpd')" class="sidebar-item button" name="rgpd"><img
+            src="../img/rgpd.svg" width="20px" height="20px" alt="rgpd" class="item-icon">
+        <div class="item-title">RGPD</div>
+    </div>
+            </div>
+        </div>
+        <div class="editor">
+            <div id="form-container">
+            <h2 class="editor-title" contenteditable>Titre du formulaire</h2>
+            <div class="element-container" id="container1" style="order: 1"><label class="label"
+                        contenteditable="true">Raison sociale de
+                        l' entreprise</label><input type="text" class="input" placeholder="Réponse">
+                    <div class="delete" id="delete1" name="1" onclick="destroyInput(1)"></div>
+                    <div class="down" id="down1" name="1" onclick="slideDown(1)"></div>
+                    <div class="up" id="up1" name="1" onclick="slideUp(1)"></div>
+                    <div class="editor-add" onclick="generateSideInput(1)">
+                        <img src="../img/add.svg" alt="add" width="16px" height="16px">
+                    </div>
+                    <div class="required-container"><input class="required-checkbox" type="checkbox"
+                            onclick="setRequired(1)">
+                        <p class="required-text">Obligatoire</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="editor-save">Enregistrer le formulaire</div>
+
+    <div class="message"><h1 class="message-title"></h1></div>
+</body>
+<script>
+    
+let formContainer = document.getElementById('form-container');
+
+const array = [
+    {
+        id: 1,
+        type: "text",
+        order: 1,
+    }
+];
+let counter = 0;
+let id = 2;
+
+
+
+function generateInput(event) {
+    let order = document.getElementsByClassName('element-container').length + 1;
+    array.push({ id: id, type: event, order: order })
+    type = event;
+    createContainer()
+    createLabel();
+    createInput();
+    createDelete();
+    createDown();
+    createUp();
+    createAdd();
+    createRequired()
+    id++;
+    counter++;
+    window.location.hash = `#container${id - 1}`;
+}
+
+function generateSideInput(element) {
+    let value = array.find(el => el.id === element).order;
+    let order = value + 1;
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].order >= order) {
+            array[i].order = array[i].order + 1;
+            let domElement = document.getElementById(`container${array[i].id}`);
+            let newOrder = parseInt(domElement.style.order) + 1;
+            console.log(newOrder);
+            domElement.style.order = newOrder;
+        }
+    }
+    array.push({ id: id, type: 'text', order: order });
+
+    type = 'text';
+    createSideContainer(value)
+    createLabel();
+    createInput();
+    createDelete();
+    createDown();
+    createUp();
+    createAdd();
+    createRequired();
+    id++;
+    counter++;
+    window.location.hash = `#container${id - 1}`;
+}
+
+
+
+function createContainer() {
+    let count = document.getElementsByClassName('element-container').length + 1;
+    let newElement = document.createElement("DIV");
+    newElement.setAttribute("class", "element-container");
+    newElement.setAttribute("style", `order:${count}`);
+    newElement.setAttribute("id", `container${id}`);
+    formContainer.appendChild(newElement);
+
+}
+
+function createSideContainer(value) {
+    let newElement = document.createElement("DIV");
+    newElement.setAttribute("class", "element-container");
+    newElement.setAttribute("style", `order:${value + 1}`);
+    newElement.setAttribute("id", `container${id}`);
+    formContainer.appendChild(newElement);
+}
+
+function createLabel() {
+    let container = document.getElementById(`container${id}`);
+    let newLabel = document.createElement("LABEL");
+    newLabel.setAttribute("class", "label");
+    newLabel.setAttribute("contenteditable", "true");
+    container.appendChild(newLabel);
+
+    switch (type) {
+        case "identite":
+            newLabel.textContent = 'Nom et Prénom du dirigeant';
+
+
+            break; case "email":
+            newLabel.textContent = 'Adresse E-mail';
+
+
+            break;
+        case "date":
+            newLabel.textContent = 'Date';
+
+
+            break;
+        case "selecteur":
+            newLabel.textContent = 'Choisissez au moins une des réponses';
+
+
+            break;
+        case "radio":
+            newLabel.textContent = 'Choisissez l\' une des réponses';
+
+
+            break;
+        case "entreprise":
+            newLabel.textContent = 'Raison sociale de l\' entreprise';
+
+
+            break;
+        case "telephone":
+            newLabel.textContent = 'Numéro de téléphone';
+
+
+            break;
+        case "salaries":
+            newLabel.textContent = 'Nombre de salariés de l\' entreprise';
+
+
+            break;
+        case "section":
+            newLabel.textContent = 'Section de l\' entreprise';
+
+
+            break;
+
+            break;
+        case "ville":
+            newLabel.textContent = 'Ville de l\' entreprise';
+
+
+            break;
+        case "rgpd":
+            newLabel.textContent = 'Acceptez vous de communiquer ces données à la CPME Réunion?';
+
+
+            break;
+        case "rgpd":
+            newLabel.textContent = 'Acceptez-vous d\'être recontacter par la CPME Réunion ?';
+
+
+            break;
+        default:
+            newLabel.textContent = `Question`;
+
+            break;
+    }
+}
+function createInput() {
+    let container = document.getElementById(`container${id}`);
+    let newInput = document.createElement("INPUT");
+    switch (type) {
+        case "date":
+            newInput.setAttribute("type", "date");
+            newInput.setAttribute("class", "input");
+
+            break;
+        case "radio":
+            createRadio()
+            return;
+            break;
+        case "ville":
+            createVille()
+            return;
+            break;
+        case "rgpd":
+            createRadio()
+            return;
+            break;
+        case "section":
+            createSection()
+            return;
+            break;
+            case "salaries":
+                createSalaries()
+                return;
+                break;
+        case "rgpd":
+            newInput.setAttribute("type", "radio");
+            newInput.setAttribute("class", "radio");
+
+            break;
+        default:
+            newInput.setAttribute("type", "text");
+            newInput.setAttribute("class", "input");
+
+            break;
+    }
+    newInput.setAttribute("placeholder", "Réponse");
+    container.appendChild(newInput);
+}
+
+function createDelete() {
+    let container = document.getElementById(`container${id}`);
+    let newdelete = document.createElement('DIV');
+    newdelete.setAttribute("class", "delete");
+    newdelete.setAttribute("id", `delete${id}`);
+    newdelete.setAttribute("name", id);
+    newdelete.setAttribute("onclick", `destroyInput(${id})`);
+    container.appendChild(newdelete);
+}
+
+function createUp() {
+    let container = document.getElementById(`container${id}`);
+    let newUp = document.createElement('DIV');
+    newUp.setAttribute("class", "up");
+    newUp.setAttribute("id", `up${id}`);
+    newUp.setAttribute("name", id);
+    newUp.setAttribute("onclick", `slideUp(${id})`);
+    container.appendChild(newUp);
+}
+
+
+function createDown() {
+    let container = document.getElementById(`container${id}`);
+    let newDown = document.createElement('DIV');
+    newDown.setAttribute("class", "down");
+    newDown.setAttribute("id", `down${id}`);
+    newDown.setAttribute("name", id);
+    newDown.setAttribute("onclick", `slideDown(${id})`);
+    container.appendChild(newDown);
+}
+
+function createAdd() {
+    let container = document.getElementById(`container${id}`);
+    let add = document.createElement('DIV');
+    add.setAttribute("class", "editor-add");
+    add.setAttribute("name", id);
+    add.setAttribute("onclick", `generateSideInput(${id})`);
+    container.appendChild(add);
+    let img = document.createElement('IMG');
+    img.setAttribute("src", "../img/add.svg");
+    img.setAttribute("width", "16px");
+    img.setAttribute("height", "16px");
+    add.appendChild(img)
+}
+
+function createRequired() {
+    let container = document.getElementById(`container${id}`);
+    let box = document.createElement('DIV');
+    box.setAttribute("class", "required-container");
+    container.appendChild(box);
+    let checkbox = document.createElement('INPUT');
+    checkbox.setAttribute('src', '../img/add.svg');
+    checkbox.setAttribute('type', 'checkbox');
+    checkbox.setAttribute('class', 'required-checkbox');
+    checkbox.setAttribute('onclick', `setRequired(${id})`);
+    let text = document.createElement('p');
+    text.setAttribute('class', 'required-text');
+    text.textContent = 'Obligatoire'
+    box.appendChild(checkbox);
+    box.appendChild(text);
+}
+
+function createRadio() {
+    let container = document.getElementById(`container${id}`);
+    let inputContainer = document.createElement('DIV');
+    let radioContainer0 = document.createElement('DIV');
+    let radioContainer1 = document.createElement('DIV');
+    let radio0 = document.createElement('INPUT');
+    let label0 = document.createElement('LABEL');
+    let radio1 = document.createElement('INPUT');
+    let label1 = document.createElement('LABEL');
+    inputContainer.setAttribute("class", "input-container");
+    radioContainer0.setAttribute("class", "radio-container");
+    radioContainer1.setAttribute("class", "radio-container");
+    radio0.setAttribute("class", "radio");
+    radio0.setAttribute("name", "oui");
+    radio0.setAttribute("type", "radio");
+    label0.setAttribute("class", "radio-label");
+    label0.textContent = "Oui";
+    radio1.setAttribute("class", "radio");
+    radio1.setAttribute("name", "non");
+    radio1.setAttribute("type", "radio");
+    label1.setAttribute("class", "radio-label");
+    label1.textContent = "Non";
+    container.appendChild(inputContainer);
+    inputContainer.appendChild(radioContainer0);
+    inputContainer.appendChild(radioContainer1);
+    radioContainer0.appendChild(radio0);
+    radioContainer0.appendChild(label0);
+    radioContainer1.appendChild(radio1);
+    radioContainer1.appendChild(label1);
+}
+
+function createVille() {
+    let villes = ["Les Avirons",
+        "Bras-Panon",
+        "Entre-Deux",
+        "L'Étang-Salé",
+        "Petite-Île",
+        "La Plaine-des-Palmistes",
+        "Le Port",
+        "La Possession",
+        "Saint-André",
+        "Saint-Benoît",
+        "Saint-Denis",
+        "Saint-Joseph",
+        "Saint-Leu",
+        "Saint-Louis",
+        "Saint-Paul",
+        "Saint-Pierre",
+        "Saint-Philippe",
+        "Sainte-Marie",
+        "Sainte-Rose",
+        "Sainte-Suzanne",
+        "Salazie",
+        "Le Tampon",
+        "Les Trois-Bassin",
+        "Cilaos"]
+    let container = document.getElementById(`container${id}`);
+    let select = document.createElement('SELECT');
+    select.setAttribute("class", "select");
+    select.setAttribute("name", "ville");
+    container.appendChild(select);
+    let placeholder = document.createElement('OPTION');
+    placeholder.setAttribute("class", "select");
+    placeholder.setAttribute("name", "null");
+    placeholder.textContent = "Choisir votre ville";
+    select.appendChild(placeholder)
+    for (let i = 0; i < villes.length; i++) {
+        let option =  document.createElement('OPTION');
+    option.setAttribute("name", villes[i]);
+    option.textContent = villes[i];
+        select.appendChild(option);
+
+    }
+}
+
+function createSalaries() {
+    let salaries = ["0 à 5 salariés",
+        "6 à 10 salariés",
+        "11 à 20 salariés",
+        "21 à 50 salariés",
+        "plus de 51 salariés"]
+    let container = document.getElementById(`container${id}`);
+    let select = document.createElement('SELECT');
+    select.setAttribute("class", "select");
+    select.setAttribute("name", "ville");
+    container.appendChild(select);
+    let placeholder = document.createElement('OPTION');
+    placeholder.setAttribute("class", "select");
+    placeholder.setAttribute("name", "null");
+    placeholder.textContent = "Choisir votre réponse";
+    select.appendChild(placeholder)
+    for (let i = 0; i < villes.length; i++) {
+        let option =  document.createElement('OPTION');
+    option.setAttribute("name", villes[i]);
+    option.textContent = villes[i];
+        select.appendChild(option);
+
+    }
+}
+
+function createSection() {
+
+    let container = document.getElementById(`container${id}`);
+    let inputContainer = document.createElement('DIV');
+    let sectionContainer0 = document.createElement('DIV');
+    let sectionContainer1 = document.createElement('DIV');
+    let sectionContainer2 = document.createElement('DIV');
+    let sectionContainer3 = document.createElement('DIV');
+
+    let section0 = document.createElement('INPUT');
+    let label0 = document.createElement('LABEL');
+    let section1 = document.createElement('INPUT');
+    let label1 = document.createElement('LABEL');
+    let section2 = document.createElement('INPUT');
+    let label2 = document.createElement('LABEL');
+    let section3 = document.createElement('INPUT');
+    let label3 = document.createElement('LABEL');
+    inputContainer.setAttribute("class", "input-container");
+    sectionContainer0.setAttribute("class", "section-container");
+    sectionContainer1.setAttribute("class", "section-container");
+    sectionContainer2.setAttribute("class", "section-container");
+    sectionContainer3.setAttribute("class", "section-container");
+
+    section0.setAttribute("class", "section");
+    section0.setAttribute("name", "artisanat");
+    section0.setAttribute("type", "radio");
+    label0.setAttribute("class", "section-label");
+    label0.textContent = "Artisanat";
+
+    section1.setAttribute("class", "section");
+    section1.setAttribute("name", "commerce");
+    section1.setAttribute("type", "radio");
+    label1.setAttribute("class", "section-label");
+    label1.textContent = "Commerce";
+
+    section2.setAttribute("class", "section");
+    section2.setAttribute("name", "services");
+    section2.setAttribute("type", "radio");
+    label2.setAttribute("class", "section-label");
+    label2.textContent = "Services";
+
+    section3.setAttribute("class", "section");
+    section3.setAttribute("name", "industrie");
+    section3.setAttribute("type", "radio");
+    label3.setAttribute("class", "section-label");
+    label3.textContent = "Industrie";
+
+    container.appendChild(inputContainer);
+    inputContainer.appendChild(sectionContainer0);
+    inputContainer.appendChild(sectionContainer1);
+    inputContainer.appendChild(sectionContainer2);
+    inputContainer.appendChild(sectionContainer3);
+    sectionContainer0.appendChild(section0);
+    sectionContainer0.appendChild(label0);
+    sectionContainer1.appendChild(section1);
+    sectionContainer1.appendChild(label1);
+    sectionContainer2.appendChild(section2);
+    sectionContainer2.appendChild(label2);
+    sectionContainer3.appendChild(section3);
+    sectionContainer3.appendChild(label3);
+}
+
+function destroyInput(id) {
+    let element = array.find(el => el.id === id);
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].order > element.order) {
+            array[i].order -= 1;
+        }
+
+    }
+    modifyDom(id);
+    modifyArray(id);
+}
+
+function modifyDom(id) {
+    let domElement = document.getElementById(`container${id}`);
+    formContainer.removeChild(domElement);
+}
+
+function modifyArray(id) {
+    const arrayElement = array.findIndex(object => {
+        return object.id === id;
+    })
+    array.splice(arrayElement, 1);
+}
+
+function slideUp(id) {
+    let newElement = array.find(el => el.id === id);
+    let order = newElement.order;
+    let replacedElement = array.find(el => el.order === order + 1);
+    replacedElement.order = order;
+    newElement.order += 1;
+    document.getElementById(`container${id}`).style.order = `${order + 1}`;
+    document.getElementById(`container${replacedElement.id}`).style.order = `${replacedElement.order}`;
+
+}
+
+function slideDown(id) {
+    let newElement = array.find(el => el.id === id);
+    let order = newElement.order;
+    let replacedElement = array.find(el => el.order === order - 1);
+    replacedElement.order = order;
+    newElement.order -= 1;
+    document.getElementById(`container${id}`).style.order = `${order - 1}`;
+    document.getElementById(`container${replacedElement.id}`).style.order = `${replacedElement.order}`;
+
+}
+
+function setRequired(id) {
+    let item = array.find(el => el.id === id);
+    if (item.required === "true") {
+        item.required = "false";
+    }
+    else {
+        item.required = "true"
+    }
+    console.log(array);
+}
+</script>
+</html>

@@ -28,7 +28,7 @@ const db = {}
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.products = require('./productModel.js')(sequelize, DataTypes);
+db.adherents = require('./adherentModel.js')(sequelize, DataTypes);
 
 //prevent new instance of database on server start
 db.sequelize.sync({ force: false })
